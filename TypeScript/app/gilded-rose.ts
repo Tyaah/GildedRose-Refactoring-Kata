@@ -67,6 +67,45 @@ export class GildedRose {
     return this.items;
   }
 
+  private DefaultStrategy(item: Item):Item {
+    let newItem = item;
+    newItem = this.reduceSellInByOneForItem(newItem);
+    newItem = this.reduceQualityByOneForItem(newItem);
+    return newItem;
+  }
+
+  private AgedBrieStrategy(item: Item):Item {
+    let newItem = item;
+    newItem = this.reduceSellInByOneForItem(newItem);
+    newItem = this.increaseQualityByOneForItem(newItem);
+    return newItem;
+  }
+
+  private SulfurasStrategy(item: Item):Item {
+    return item;
+  }
+
+  private BackstagePassesStrategy(item: Item):Item {
+    let newItem = item;
+    newItem = this.reduceSellInByOneForItem(newItem);
+
+    // Sell date has passed, drop quality to 0
+    if(newItem.sellIn < 0) {
+      newItem = this.setQualityToZeroForItem(newItem);
+      return newItem;
+    }
+
+    // Increase quality based on remaining sellIn days
+    newItem = this.increaseQualityByOneForItem(newItem);
+    if (newItem.sellIn < 10) {
+      newItem = this.increaseQualityByOneForItem(newItem);
+    }
+    if (newItem.sellIn < 5) {
+      newItem = this.increaseQualityByOneForItem(newItem);
+    }
+    return newItem;
+  }
+
   /**
    * Reduce sellIn by one for the given item
    * @param item The item to reduce sellIn for
