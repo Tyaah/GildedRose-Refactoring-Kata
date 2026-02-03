@@ -67,24 +67,52 @@ export class GildedRose {
     return this.items;
   }
 
+  /**
+   * Reduce sellIn by one for the given item
+   * @param item The item to reduce sellIn for
+   * @returns The updated item with reduced sellIn
+   */
   private reduceSellInByOneForItem(item: Item):Item {
     const newItem: Item = item;
     newItem.sellIn = item.sellIn - 1;
     return newItem;
   }
 
+  /**
+   * Reduce quality by one for the given item
+   * Will not reduce quality below 0
+   * @param item The item to reduce quality for
+   * @returns The updated item with reduced quality
+   */
   private reduceQualityByOneForItem(item: Item):Item {
+    // Ensure quality does not go below 0
+    if (item.quality <= 0) return item;
+
     const newItem: Item = item;
     newItem.quality = item.quality - 1;
     return newItem;
   }
 
+  /**
+   * Increase quality by one for the given item
+   * Will not increase quality above 50
+   * @param item The item to increase quality for
+   * @returns The updated item with increased quality
+   */
   private increaseQualityByOneForItem(item: Item):Item {
+    // Ensure quality does not go above 50
+    if (item.quality >= 50) return item;
+
     const newItem: Item = item;
     newItem.quality = item.quality + 1;
     return newItem;
   }
 
+  /**
+   * Set quality to zero for the given item
+   * @param item The item to set quality to zero for
+   * @returns The updated item with quality set to zero
+   */
   private setQualityToZeroForItem(item: Item):Item {
     const newItem: Item = item;
     newItem.quality = 0;
