@@ -12,7 +12,8 @@ export class GildedRose {
   }
 
   updateQuality() {
-    for (let i = 0; i < this.items.length; i++) {
+    for (let i in this.items) {
+      // cannot use const [index, item] of this.items.entries() because of ES5 target (only available in ES6+) 🫠
       switch (this.items[i].name) {
         case ItemNames.AGED_BRIE:
           this.items[i] = this.strategies.AgedBrieStrategy(this.items[i]);
