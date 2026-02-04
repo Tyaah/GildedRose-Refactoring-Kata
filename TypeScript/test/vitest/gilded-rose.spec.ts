@@ -1,5 +1,4 @@
-import { GildedRose } from "@/gilded-rose";
-import { Item } from "@/item.types";
+import { GildedRose, Item } from "@/gilded-rose";
 
 /**
  * Requirements:

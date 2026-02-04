@@ -83,4 +83,7 @@ export class GildedRose {
   }
 }
 
+// Re-exporting Item class for external usage
+export { Item } from "./item.types";
+
 
